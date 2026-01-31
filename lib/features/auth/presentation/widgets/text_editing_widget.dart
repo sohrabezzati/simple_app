@@ -19,21 +19,18 @@ class TextEditingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          hint: Text(hint),
-          label: Text(label),
-          error: errorText != null ? Text(errorText ?? '') : null,
-          border: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey),
-            borderRadius: BorderRadius.circular(10),
-          ),
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        hint: Text(hint),
+        label: Text(label),
+        error: errorText != null ? Text(errorText ?? '') : null,
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10),
         ),
-        obscureText: obscureText,
       ),
+      obscureText: obscureText,
     );
   }
 }
