@@ -64,6 +64,8 @@ class LoginScreen extends ConsumerWidget {
                                 _passwordController.text,
                               );
                           if (loginResult) {
+                            _emailController.dispose();
+                            _passwordController.dispose();
                             context.pushReplacement(RoutNames.instance.home);
                           }
                         },
