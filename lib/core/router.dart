@@ -1,5 +1,5 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+// import 'dart:async';
+// import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simple_app/core/constants/rout_names.dart';
 import 'package:simple_app/core/global/rout_kies.dart';
@@ -11,18 +11,18 @@ class AppRoutes {
   static final AppRoutes instance = AppRoutes._();
   factory AppRoutes() => instance;
 
-  static FutureOr<String?> _handleHomeRedirect(BuildContext context, _) async {
-    return null;
-  }
+  // static FutureOr<String?> _handleHomeRedirect(BuildContext context, _) async {
+  //   return RoutNames.instance.login;
+  // }
 
   final router = GoRouter(
     navigatorKey: GlobalKeys.instance.rootKey,
-    initialLocation: RoutNames.instance.home,
+    initialLocation: RoutNames.instance.login,
     routes: [
       GoRoute(
         name: RoutNames.instance.home,
         path: RoutNames.instance.home,
-        redirect: _handleHomeRedirect,
+        // redirect: _handleHomeRedirect,
         pageBuilder: (context, state) =>
             NoTransitionPage(child: const HomeScreen()),
       ),
@@ -30,8 +30,7 @@ class AppRoutes {
       GoRoute(
         name: RoutNames.instance.login,
         path: RoutNames.instance.login,
-        pageBuilder: (context, state) =>
-            NoTransitionPage(child: const LoginScreen()),
+        pageBuilder: (context, state) => NoTransitionPage(child: LoginScreen()),
       ),
     ],
   );
