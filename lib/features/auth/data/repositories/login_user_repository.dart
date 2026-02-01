@@ -1,33 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/emial_validator_provider.dart';
+import '../providers/email_validator_provider.dart';
 import '../providers/password_validator_provider.dart';
 
 class LoginUserRepository extends ChangeNotifier {
   final Ref ref;
   LoginUserRepository(this.ref);
+
   bool _isLoggingIn = false;
   bool get isLoggingIn => _isLoggingIn;
 
-  Future<bool> login(String email, String password) async {
-    _isLoggingIn = true;
-    notifyListeners();
-    ref.read(emailValidatorProvider.notifier).validate(email);
-    ref.read(passwordValidatorProvider.notifier).validate(password);
-    final emailValidator = ref.read(emailValidatorProvider);
-    final passwordValidator = ref.read(passwordValidatorProvider);
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
 
-    // Simulate a network delay
-    await Future.delayed(const Duration(seconds: 2));
-    if (emailValidator == null && passwordValidator == null) {
+  Future<bool> login(String email, String password) async {
+    try {
+      _isLoggingIn = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      ref.read(emailValidatorProvider.notifier).validate(email);
+      ref.read(passwordValidatorProvider.notifier).validate(password);
+
+      final emailValidator = ref.read(emailValidatorProvider);
+      final passwordValidator = ref.read(passwordValidatorProvider);
+
+      if (emailValidator != null || passwordValidator != null) {
+        _isLoggingIn = false;
+        notifyListeners();
+        return false;
+      }
+
+      await Future.delayed(const Duration(seconds: 2));
+
       _isLoggingIn = false;
       notifyListeners();
       return true;
-    } else {
+    } catch (e) {
       _isLoggingIn = false;
+      _errorMessage = 'An error occurred during login. Please try again.';
       notifyListeners();
       return false;
     }
+  }
+
+  void clearError() {
+    _errorMessage = null;
+    notifyListeners();
   }
 }

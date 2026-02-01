@@ -7,6 +7,7 @@ final passwordValidatorProvider =
 
 class PasswordValidator extends StateNotifier<String?> {
   PasswordValidator() : super(null);
+
   void validate(String? password) {
     if (password == null || password.isEmpty) {
       state = 'Please enter your password';
@@ -16,6 +17,7 @@ class PasswordValidator extends StateNotifier<String?> {
       state = 'Password must be at least 6 characters';
       return;
     }
+
     if (!password.contains(RegExp(r'[A-Z]'))) {
       state = 'Password must contain at least one uppercase letter';
       return;

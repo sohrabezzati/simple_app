@@ -18,7 +18,7 @@ class EmailValidator extends StateNotifier<String?> {
     if (!email.contains('.com')) {
       state = 'Email must end with .com';
       return;
-    }
+  }
     if (email != 'test@example.com') {
       state = 'Invalid email';
       return;
