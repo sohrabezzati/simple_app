@@ -5,8 +5,8 @@ A simple Flutter authentication app with email and password validation.
 ## Authentication
 
 Use any valid email and password that meets the following requirements:
-- **Email**: Valid email format (e.g., user@example.com)
-- **Password**: At least 8 characters with uppercase, lowercase, and number
+- **Email**: Valid email format (e.g., test@example.com)
+- **Password**: At least 8 characters with uppercase, lowercase, and number (e.g., 123456A)
 
 ## Screenshots
 
